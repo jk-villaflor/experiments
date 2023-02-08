@@ -10,6 +10,7 @@ export default function Home() {
 
   const minNormalData =30;
   const maxNormalData = 70;
+  const sampleData = [33, 53, 85, 41, 44, 39];
   return (
     <>
       <Head>
@@ -20,7 +21,10 @@ export default function Home() {
       </Head>
       <main className={styles.main}>      
         <div className={styles.description}>
-          <TestChart minNormal={minNormalData} maxNormal={maxNormalData}/>
+          <TestChart 
+            minNormal={minNormalData} 
+            maxNormal={maxNormalData} 
+            dataPoints={sampleData} />
         </div>
       </main>
     </>

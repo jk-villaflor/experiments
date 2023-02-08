@@ -9,13 +9,20 @@ import {
   } from 'chart.js';
 import { Scatter, Line } from 'react-chartjs-2';
 import annotationPlugin from 'chartjs-plugin-annotation';
-// const months = Utils;
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, CategoryScale, annotationPlugin);
+ChartJS.register(
+  LinearScale, 
+  PointElement, 
+  LineElement, 
+  Tooltip, 
+  Legend, 
+  CategoryScale, 
+  annotationPlugin, 
+  ChartDataLabels
+); //ahhh the long lines at the registry. May it be school or a government facility
 
-export default function TestChart({ minNormal, maxNormal }){
-
-  // console.log('props.maxNormal =>',maxNormal);
+export default function TestChart({ minNormal, maxNormal, dataPoints }){
 
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
     const data = {
@@ -23,32 +30,17 @@ export default function TestChart({ minNormal, maxNormal }){
       datasets: [
         {
           label: "First dataset",
-          data: [33, 53, 85, 41, 44, 39],
-          // data: [{x: 1, y: 33}, {x: 2.5, y: 54}],
-          fill: true,
+          data: dataPoints,
+          // data: [51,12,23,59,90,12],
+          // fill: true,
           backgroundColor: "rgba(75,192,192,0.2)",
           borderColor: "rgba(75,192,192,1)"
         },
-        // {
-        //   label: "Min",
-        //   data: [80,80,80,80,80,80, 80],
-        //   fill: false,
-        //   pointRadius: 0,
-        //   borderColor: "#E83845",
-        //   backgroundColor: "#E83845"
-        // },
-        // {
-        //   label: "Max",
-        //   data: [40, 40, 40, 40, 40, 40, 40],
-        //   fill: false,
-        //   pointRadius: 0,
-        //   borderColor: "#E83845",
-        //   backgroundColor: "#E83845"
-        // }
       ]
     };
 
       const options = {
+        // parsing: false,
         scales:{
           y:{
             title: {display: true, text: "Y in units whatever"}
@@ -57,7 +49,7 @@ export default function TestChart({ minNormal, maxNormal }){
             adapter:{
 
             },
-            title:{display: true, text:"Date"}
+            title:{display: true, text:"Months in Whatever year"}
           }
         },
         responsive: true,
@@ -83,6 +75,34 @@ export default function TestChart({ minNormal, maxNormal }){
                 borderWidth: 2
               }
             }
+          },
+          tooltip:{
+            // callbacks:{
+            //   label: function(context){
+            //     let label = context.dataset.label;                
+            //     if(context.raw > 73.5){
+            //       label = "HAHAHA YOU'RE FUCKED NOW!!!!!";
+            //     }else if (context.raw < 40){
+            //       label = "THAT'S BAD. You're doing well :D";
+            //     }
+            //     else{
+            //       label = context.dataset.raw;
+            //     }
+            //     return label;
+            //   },
+            // }
+          },
+          datalabels: {
+            backgroundColor: function(context) {
+              return context.dataset.backgroundColor;
+            },
+            borderRadius: 4,
+            color: 'white',
+            font: {
+              weight: 'bold'
+            },
+            formatter: Math.round,
+            padding: 6
           }
         },
       };
