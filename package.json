@@ -11,6 +11,7 @@
   "dependencies": {
     "@next/font": "13.1.6",
     "chartjs": "^0.3.24",
+    "chartjs-plugin-annotation": "^2.1.2",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "faker": "^6.6.6",
